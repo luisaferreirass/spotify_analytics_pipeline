@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spotify Dashboard</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <span>Spotify Data</span>
+        </div>
+
+        <nav class="nav-tabs" aria-label="Dashboard sections">
+          <button class="nav-tab active" data-view="overview" type="button">Overview</button>
+          <button class="nav-tab" data-view="history" type="button">Historico</button>
+          <button class="nav-tab" data-view="library" type="button">Biblioteca</button>
+          <button class="nav-tab" data-view="rankings" type="button">Rankings</button>
+          <button class="nav-tab" data-view="account" type="button">Conta</button>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Dashboard pessoal</p>
+            <h1 id="page-title">Overview</h1>
+          </div>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span id="data-status">dados locais</span>
+          </div>
+        </header>
+
+        <section id="overview" class="view active">
+          <div class="metric-grid" id="overview-cards"></div>
+
+          <div class="dashboard-grid">
+            <section class="panel panel-wide">
+              <div class="panel-header">
+                <h2>Evolucao mensal</h2>
+              </div>
+              <div id="monthly-chart" class="chart"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Popularidade</h2>
+              </div>
+              <div id="popularity-donut" class="donut-wrap"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="history" class="view">
+          <div class="dashboard-grid">
+            <section class="panel panel-wide">
+              <div class="panel-header">
+                <h2>Musicas por dia</h2>
+              </div>
+              <div id="plays-day-chart" class="chart"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Por horario</h2>
+              </div>
+              <div id="plays-hour-chart" class="hour-grid"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Artistas mais ouvidos</h2>
+              </div>
+              <div id="top-artists-list" class="rank-list"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Albuns mais ouvidos</h2>
+              </div>
+              <div id="top-albums-list" class="rank-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="library" class="view">
+          <div class="dashboard-grid">
+            <section class="panel panel-wide">
+              <div class="panel-header">
+                <h2>Musicas curtidas</h2>
+              </div>
+              <div id="saved-tracks-table" class="data-table"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Artistas da biblioteca</h2>
+              </div>
+              <div id="library-artists-list" class="rank-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="rankings" class="view">
+          <div class="segmented-control" role="tablist" aria-label="Time range">
+            <button class="range-tab active" data-range="short_term" type="button">Curto</button>
+            <button class="range-tab" data-range="medium_term" type="button">Medio</button>
+            <button class="range-tab" data-range="long_term" type="button">Longo</button>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Top musicas</h2>
+              </div>
+              <div id="top-tracks-ranking" class="rank-list large"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Top artistas</h2>
+              </div>
+              <div id="top-artists-ranking" class="rank-list large"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="account" class="view">
+          <div class="account-layout">
+            <section class="panel auth-panel">
+              <div class="panel-header">
+                <h2>Conectar Spotify</h2>
+                <span id="auth-state" class="auth-state disconnected">desconectado</span>
+              </div>
+
+              <form id="spotify-auth-form" class="auth-form">
+                <label class="field">
+                  <span>Client ID</span>
+                  <input id="spotify-client-id" name="client_id" autocomplete="off" placeholder="ex: 123abc..." required>
+                </label>
+
+                <label class="field">
+                  <span>Redirect URI</span>
+                  <input id="spotify-redirect-uri" name="redirect_uri" autocomplete="off" placeholder="http://localhost:8000/auth/callback" required>
+                </label>
+
+                <label class="field">
+                  <span>Escopos</span>
+                  <textarea id="spotify-scopes" name="scopes" rows="4" required></textarea>
+                </label>
+
+                <div class="auth-actions">
+                  <button class="primary-button" type="submit">Salvar e conectar</button>
+                  <button class="ghost-button" id="clear-auth-config" type="button">Limpar</button>
+                </div>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Status da integracao</h2>
+              </div>
+              <div class="connection-summary">
+                <div class="connection-row">
+                  <span>API de autenticacao</span>
+                  <strong id="auth-api-status">aguardando</strong>
+                </div>
+                <div class="connection-row">
+                  <span>Credenciais</span>
+                  <strong id="credential-status">nao salvas</strong>
+                </div>
+                <div class="connection-row">
+                  <span>Proximo passo</span>
+                  <strong id="next-auth-step">configurar app Spotify</strong>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

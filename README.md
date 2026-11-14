@@ -1,14 +1,14 @@
 # Spotify Analytics Pipeline
 
-Pipeline **end-to-end de Engenharia de Dados** para coletar, armazenar, processar e disponibilizar dados da API do Spotify.
+**End-to-end Data Engineering** pipeline to collect, store, process and serve data from the Spotify API.
 
-O projeto automatiza a ingestão de informações da conta do usuário, armazena os dados em um banco PostgreSQL, executa coletas agendadas com Apache Airflow e disponibiliza indicadores analíticos por meio de uma API FastAPI e um dashboard web.
+The project automates the ingestion of the user's account information, stores the data in a PostgreSQL database, runs scheduled collections with Apache Airflow and serves analytical indicators through a FastAPI API and a web dashboard.
 
-Além da coleta de dados, o pipeline mantém histórico temporal de rankings, biblioteca e reproduções, permitindo análises sobre hábitos musicais ao longo do tempo.
+Beyond data collection, the pipeline keeps a time-based history of rankings, library and plays, enabling analysis of listening habits over time.
 
 ---
 
-# Arquitetura
+# Architecture
 
 ```text
                 Spotify API
@@ -33,93 +33,93 @@ Além da coleta de dados, o pipeline mantém histórico temporal de rankings, bi
 
 ---
 
-# Principais Funcionalidades
+# Key Features
 
-- Autenticação OAuth2 com Spotify.
-- Coleta automática de dados da conta do usuário.
-- Armazenamento em modelo relacional no PostgreSQL.
-- Histórico de reproduções recentes.
-- Sincronização da biblioteca de músicas e álbuns salvos.
-- Registro histórico dos rankings de artistas e músicas.
-- Histórico da popularidade das músicas.
-- Criação de views SQL voltadas para análise.
-- API REST construída com FastAPI.
-- Dashboard web consumindo a API.
-- Orquestração completa utilizando Apache Airflow.
-- Ambiente totalmente containerizado com Docker Compose.
+- OAuth2 authentication with Spotify.
+- Automatic collection of the user's account data.
+- Relational data model stored in PostgreSQL.
+- History of recent plays.
+- Synchronization of saved tracks and albums.
+- Historical record of artist and track rankings.
+- Track popularity history.
+- SQL views built for analytics.
+- REST API built with FastAPI.
+- Web dashboard consuming the API.
+- Full orchestration with Apache Airflow.
+- Fully containerized environment with Docker Compose.
 
 ---
 
 # Stack
 
-| Categoria | Tecnologias |
+| Category | Technologies |
 |-----------|-------------|
-| Linguagem | Python |
-| Banco de Dados | PostgreSQL |
-| Orquestração | Apache Airflow |
+| Language | Python |
+| Database | PostgreSQL |
+| Orchestration | Apache Airflow |
 | API | FastAPI |
 | Spotify | Spotipy |
-| Containerização | Docker Compose |
-| Front-end | HTML, CSS e JavaScript |
+| Containerization | Docker Compose |
+| Front-end | HTML, CSS and JavaScript |
 
 ---
 
-# Dados Coletados
+# Collected Data
 
-O pipeline coleta e mantém histórico dos seguintes conjuntos de dados.
+The pipeline collects and keeps a history of the following datasets.
 
-## Perfil
+## Profile
 
-- Nome
-- País
+- Name
+- Country
 - Email
-- Seguidores
-- Foto
-- Data da coleta
+- Followers
+- Photo
+- Collection date
 
-## Artistas
+## Artists
 
-- Nome
-- Popularidade
-- Imagem
-- Histórico de popularidade
+- Name
+- Popularity
+- Image
+- Popularity history
 
-## Álbuns
+## Albums
 
-- Nome
-- Data de lançamento
-- Número de faixas
-- Capa
+- Name
+- Release date
+- Number of tracks
+- Cover
 
-## Músicas
+## Tracks
 
-- Nome
-- Álbum
-- Duração
-- Popularidade
-- Conteúdo explícito
+- Name
+- Album
+- Duration
+- Popularity
+- Explicit content
 - Preview
-- URL Spotify
+- Spotify URL
 
-## Biblioteca
+## Library
 
-- Músicas curtidas
-- Álbuns salvos
-- Data de adição
+- Liked songs
+- Saved albums
+- Date added
 
-## Histórico
+## History
 
-- Músicas reproduzidas recentemente
-- Horário da reprodução
+- Recently played tracks
+- Play time
 
 ## Rankings
 
-Snapshots de:
+Snapshots of:
 
 - Top Tracks
 - Top Artists
 
-nos períodos:
+for the periods:
 
 - Short Term
 - Medium Term
@@ -127,112 +127,112 @@ nos períodos:
 
 ---
 
-# Métricas Disponíveis
+# Available Metrics
 
-O projeto gera diversas métricas analíticas por meio de views SQL.
+The project generates several analytical metrics through SQL views.
 
 ## Overview
 
-- Total de reproduções
-- Total de músicas curtidas
-- Total de álbuns salvos
-- Músicas únicas
-- Artistas únicos
-- Popularidade média
+- Total plays
+- Total liked songs
+- Total saved albums
+- Unique tracks
+- Unique artists
+- Average popularity
 
-## Histórico
+## History
 
-- Evolução mensal de reproduções
-- Evolução de artistas únicos
-- Evolução de músicas únicas
-- Evolução de álbuns únicos
-- Plays por dia
-- Plays por horário
-- Distribuição por dia da semana
-- Tendência de repetição de músicas
+- Monthly evolution of plays
+- Evolution of unique artists
+- Evolution of unique tracks
+- Evolution of unique albums
+- Plays per day
+- Plays per hour
+- Distribution by day of the week
+- Track repetition trend
 
 ## Rankings
 
-- Top artistas
-- Top músicas
-- Top álbuns
+- Top artists
+- Top tracks
+- Top albums
 
-## Biblioteca
+## Library
 
-- Evolução da biblioteca
-- Artistas mais presentes
-- Lista completa das músicas curtidas
+- Library evolution
+- Most frequent artists
+- Full list of liked songs
 
-## Tendências
+## Trends
 
-- Crescimento mensal de artistas
-- Histórico de popularidade das músicas
-- Histórico dos rankings coletados
+- Monthly artist growth
+- Track popularity history
+- History of collected rankings
 
 ---
 
 # Dashboard
 
-O dashboard é dividido em cinco módulos.
+The dashboard is split into five modules.
 
 ## Overview
 
-Indicadores gerais da conta.
+General account indicators.
 
-- Total de plays
-- Músicas curtidas
-- Álbuns salvos
-- Popularidade média
-- Artistas únicos
-- Músicas únicas
+- Total plays
+- Liked songs
+- Saved albums
+- Average popularity
+- Unique artists
+- Unique tracks
 
-## Histórico
+## History
 
-Visualizações temporais.
+Time-based visualizations.
 
-- Evolução mensal
-- Distribuição por horário
-- Plays por dia
-- Top artistas
-- Top álbuns
+- Monthly evolution
+- Distribution by hour
+- Plays per day
+- Top artists
+- Top albums
 
-## Biblioteca
+## Library
 
-- Músicas salvas
-- Artistas mais presentes
+- Saved tracks
+- Most frequent artists
 
 ## Rankings
 
-Visualização dos rankings para:
+Rankings view for:
 
 - Short Term
 - Medium Term
 - Long Term
 
-## Conta
+## Account
 
-Tela destinada à configuração da autenticação do Spotify.
+Screen for configuring Spotify authentication.
 
-> Caso a API ainda não esteja disponível ou não existam dados coletados, o dashboard utiliza dados locais para manter toda a interface funcional.
+> If the API is not available yet or no data has been collected, the dashboard falls back to local data to keep the whole interface functional.
 
 ---
 
-# Orquestração com Airflow
+# Orchestration with Airflow
 
-O projeto possui quatro DAGs independentes.
+The project has four independent DAGs.
 
-| DAG | Frequência | Objetivo |
+| DAG | Frequency | Purpose |
 |------|-----------|----------|
-| `spotify_quick_collection` | A cada 30 minutos | Perfil + histórico recente |
-| `spotify_library_collection` | Diariamente às 03:00 | Biblioteca |
-| `spotify_rankings_collection` | Diariamente às 04:00 | Rankings |
-| `spotify_full_collection` | Manual | Executa todos os coletores |
+| `spotify_quick_collection` | Every 30 minutes | Profile + recent history |
+| `spotify_library_collection` | Daily at 03:00 | Library |
+| `spotify_rankings_collection` | Daily at 04:00 | Rankings |
+| `spotify_full_collection` | Manual | Runs all collectors |
 
-As DAGs são criadas pausadas por padrão.
+The DAGs are created paused by default.
 
 ---
 
-# Estrutura do Projeto
+# Project Structure
 
 ```text
 .
@@ -255,23 +255,23 @@ As DAGs são criadas pausadas por padrão.
 
 ---
 
-# Como Executar
+# How to Run
 
-Clone o repositório.
+Clone the repository.
 
 ```bash
-git clone <repositorio>
+git clone <repository>
 
 cd spotify-analytics
 ```
 
-Crie o arquivo `.env`.
+Create the `.env` file.
 
 ```bash
 cp .env.example .env
 ```
 
-Configure as variáveis de ambiente.
+Set the environment variables.
 
 ```env
 POSTGRES_DB=spotify_analytics
@@ -280,37 +280,37 @@ POSTGRES_PASSWORD=postgres
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 
-SPOTIFY_CLIENT_ID=seu_client_id
-SPOTIFY_CLIENT_SECRET=seu_client_secret
+SPOTIFY_CLIENT_ID=your_client_id
+SPOTIFY_CLIENT_SECRET=your_client_secret
 SPOTIFY_REDIRECT_URI=http://127.0.0.1:8888/callback
 ```
 
-Suba toda a infraestrutura.
+Start the whole infrastructure.
 
 ```bash
 docker compose up --build
 ```
 
-Após a inicialização, os serviços estarão disponíveis em:
+Once started, the services will be available at:
 
-| Serviço | URL |
+| Service | URL |
 |----------|-----|
 | Dashboard | http://localhost:8000 |
 | API | http://localhost:8000 |
 | Airflow | http://localhost:8080 |
 
-Credenciais padrão do Airflow:
+Default Airflow credentials:
 
 ```text
-Usuário: admin
-Senha: admin
+Username: admin
+Password: admin
 ```
 
 ---
 
-# Execução Manual
+# Manual Execution
 
-Também é possível executar os coletores diretamente, sem utilizar o Airflow.
+You can also run the collectors directly, without Airflow.
 
 ```bash
 python src/main.py --mode quick
@@ -322,20 +322,20 @@ python src/main.py --mode rankings
 python src/main.py --mode full
 ```
 
-## Modos disponíveis
+## Available modes
 
-| Modo | Descrição |
+| Mode | Description |
 |------|-----------|
-| `quick` | Coleta perfil e histórico recente |
-| `library` | Atualiza biblioteca |
-| `rankings` | Atualiza rankings |
-| `full` | Executa todas as coletas |
+| `quick` | Collects profile and recent history |
+| `library` | Updates the library |
+| `rankings` | Updates rankings |
+| `full` | Runs all collections |
 
 ---
 
 # API
 
-Principais endpoints disponíveis.
+Main available endpoints.
 
 ```http
 GET /health
@@ -365,26 +365,25 @@ GET /dashboard/trends/artist-growth
 
 # Roadmap
 
-## Concluído
+## Done
 
-- [x] Autenticação OAuth2
-- [x] Coleta de perfil
-- [x] Coleta de histórico recente
-- [x] Biblioteca de músicas
-- [x] Biblioteca de álbuns
-- [x] Rankings por período
+- [x] OAuth2 authentication
+- [x] Profile collection
+- [x] Recent history collection
+- [x] Track library
+- [x] Album library
+- [x] Rankings by period
 - [x] PostgreSQL
-- [x] Views analíticas
+- [x] Analytical views
 - [x] FastAPI
-- [x] Dashboard Web
+- [x] Web Dashboard
 - [x] Docker Compose
 - [x] Apache Airflow
 
-## Melhorias Futuras
+## Future Improvements
 
-- Testes automatizados
-- Monitoramento e logs
-- Cache de consultas
-- Exportação de relatórios
-- CI/CD com GitHub Actions
-
+- Automated tests
+- Monitoring and logging
+- Query caching
+- Report export
+- CI/CD with GitHub Actions
